@@ -10,10 +10,10 @@ const Admin = (...roles: string[]) => {
       return res.status(401).json({ message: "You are not Authorized" });
     }
 
-    //? extract token from Bearer <token>
+ 
     const tokens = authtoken.split(" ");
 
-    //? check if token format is valid
+ 
     if (tokens.length !== 2 || tokens[0] !== "Bearer") {
       return res
         .status(401)

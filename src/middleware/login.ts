@@ -5,12 +5,19 @@ import { pool } from "../database/db";
 
 const login = () => {
   return async (req: Request, res: Response, Next: NextFunction) => {
-    const token = req.headers.authorization;
-    if (!token) {
-      return res.status(500).json({
-        message: "you are not allowed !! jwt ",
-      });
+    const authtoken = req.headers.authorization;
+    if (!authtoken) {
+      return res.status(401).json({ message: "You are not Authorized" });
     }
+
+    const tokens = authtoken.split(" ");
+
+    if (tokens.length !== 2 || tokens[0] !== "Bearer") {
+      return res
+        .status(401)
+        .json({ message: "Invalid Authorization header format" });
+    }
+    const token = tokens[1]!;
     const decoded = jwt.verify(
       token,
       config.JWT_SECTET as string
