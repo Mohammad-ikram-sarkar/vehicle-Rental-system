@@ -19,8 +19,8 @@
 // app.use("/api/v1/bookings", bookingRouter);
 import app from "./app";
 import { config } from "./config";
-const port = config.PORT;
+const PORT = config.PORT;
 
-app.listen(port, () => {
-  console.log(`Example app on ${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app on ${PORT}`);
 });

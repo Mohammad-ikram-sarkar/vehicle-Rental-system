@@ -20,18 +20,18 @@ const createUser = async (payload: Record<string, unknown>) => {
 
 const loginUser = async (payload: Record<string, unknown>) => {
   const { email, password } = payload;
-  try {
+  
     const result = await pool.query(`SELECT * FROM users WHERE email=$1`, [
       email,
     ]);
     if (result.rows.length === 0) {
-      return null;
+      return "User not created";
     }
 
     const user = result.rows[0];
     const match = await bcrypt.compare(password as string, user.password);
     if (!match) {
-      return false;
+      return "User password not match";
     }
 
     const JwtPayload = {
@@ -40,12 +40,12 @@ const loginUser = async (payload: Record<string, unknown>) => {
       email: user.email,
       role: user.role,
     };
-    const secret = config.JWT_SECTET;
-    const token = jwt.sign(JwtPayload, secret!, { expiresIn: "7d" });
+
+    const token = jwt.sign(JwtPayload, config.JWT_SECRET!, { expiresIn: "7d" });
+      delete user.password;
+
     return { token, user };
-  } catch (err: any) {
-    return false;
-  }
+ 
 };
 
 export const authService = {

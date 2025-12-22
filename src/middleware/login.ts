@@ -20,7 +20,7 @@ const login = () => {
     const token = tokens[1]!;
     const decoded = jwt.verify(
       token,
-      config.JWT_SECTET as string
+      config.JWT_SECRET as string
     ) as JwtPayload;
 
     const user = await pool.query(`SELECT * FROM users WHERE email=$1`, [

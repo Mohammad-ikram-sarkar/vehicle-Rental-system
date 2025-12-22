@@ -4,9 +4,10 @@ import  path from "path"
 dotenv.config({path : path.join(process.cwd(), ".env")})
 
 export const config = {
-          CONNECTION_STRING : process.env.CONNECTION_STE,
+          CONNECTION_STRING : process.env.CONNECTION_STRING,
           PORT : process.env.port,
-          JWT_SECTET : process.env.JWT_SECRET
+          JWT_SECRET : process.env.jwt
 
 
 }
+console.log("this ",process.env.CONNECTION_STRING)

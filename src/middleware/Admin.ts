@@ -22,7 +22,7 @@ const Admin = (...roles: string[]) => {
     const token = tokens[1]!;
     const decoded = jwt.verify(
       token,
-      config.JWT_SECTET as string
+      config.JWT_SECRET as string
     ) as JwtPayload;
     req.user = decoded;
     if (roles.length && !roles.includes(decoded.role)) {

@@ -5,6 +5,6 @@ import login from "../../middleware/login";
 const router = Router();
 
 router.post("/signup", authController.createUser);
-router.post("/signin", login(), authController.loginUser);
+router.post("/signin",  authController.loginUser);
 
 export const authRouter = router;
